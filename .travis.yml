@@ -25,10 +25,6 @@ branches:
     - master
 
 after_success:
-
-  #LOGIN
-  - docker login -u $D_USER -p $D_PASS
-
   #TAG
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
