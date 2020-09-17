@@ -1,0 +1,13 @@
+version: '3'
+services:
+  #   SPRING_BOOT APPLICATION
+  spring_boot:
+    image: lindvior2/intellst-opencv:latest
+    container_name: intellst
+    ports:
+      - "8083:8083"
+    networks:
+      - intellst
+networks:
+  intellst:
+    driver: intellst
