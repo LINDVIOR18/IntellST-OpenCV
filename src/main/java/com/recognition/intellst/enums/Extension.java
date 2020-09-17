@@ -1,8 +1,7 @@
 package com.recognition.intellst.enums;
 
 public enum Extension {
-    WIN(".dll"),
-    NIX(".so");
+    WIN(".dll");
 
     private String label;
 
