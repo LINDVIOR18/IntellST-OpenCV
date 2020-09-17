@@ -30,7 +30,7 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
   #IntellST-OpenCV
-  - export IntellST_OpenCV=mDKoBrA/IntellST-OpenCV
+  - export IntellST_OpenCV=LINDVIOR18/IntellST-OpenCV
   - docker build -t $IntellST_OpenCV:$COMMIT ./
   - docker tag $IntellST_OpenCV:$COMMIT $IntellST_OpenCV:$TAG
   - docker push $IntellST_OpenCV
