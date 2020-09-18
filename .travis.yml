@@ -24,15 +24,16 @@ branches:
   only:
     - master
 
+script:
+  - ./mvnw clean install -B
+
 after_success:
   #TAG
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   #Docker Login
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker login -u $DOCKER_USER --password-stdin $DOCKER_PASS
   #IntellST-OpenCV
-  - export IntellST-OpenCV=lindvior2/intellst-opencv
-  - docker build -t $IntellST-OpenCV:$COMMIT ./
-  - docker tag $IntellST-OpenCV:$COMMIT $IntellST-OpenCV:$TAG
-  - docker push $IntellST-OpenCV
-script:
-  - ./mvnw clean install -B
+  - export intellst=lindvior2/intellst-opencv
+  - docker build -t $intellst:$COMMIT ./
+  - docker tag $intellst:$COMMIT $intellst:$TAG
+  - docker push $intellst
