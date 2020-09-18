@@ -30,9 +30,9 @@ after_success:
   #Docker Login
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   #IntellST-OpenCV
-  - docker build -t lindvior2/intellst-opencv
-  - docker run -d -p lindvior2/intellst-opencv
-  - docker push intellst-opencv
-
+  - export IntellST-OpenCV=lindvior2/intellst-opencv
+  - docker build -t $IntellST-OpenCV:$COMMIT ./
+  - docker tag $IntellST-OpenCV:$COMMIT $IntellST-OpenCV:$TAG
+  - docker push $IntellST-OpenCV
 script:
   - ./mvnw clean install -B
