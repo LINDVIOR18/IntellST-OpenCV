@@ -96,18 +96,11 @@
 
         <!--        Tesseract   -->
         <dependency>
-            <groupId>net.sourceforge.tess4j</groupId>
-            <artifactId>tess4j</artifactId>
-            <version>4.5.2</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.bytedeco/tesseract -->
-        <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>tesseract</artifactId>
             <version>4.1.1-1.5.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.bytedeco/javacv-platform -->
+
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv-platform</artifactId>
@@ -129,5 +122,16 @@
             <version>1.22.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
 
