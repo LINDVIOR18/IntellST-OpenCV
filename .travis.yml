@@ -10,8 +10,7 @@ dist: trusty
 jdk:
   - openjdk11
 
-before_install:
-  - chmod +x mvnw
+
 
 os:
   - linux
@@ -25,7 +24,11 @@ branches:
     - master
 
 script:
-  - ./mvnw clean install -B
+  - mvn -N io.takari:maven:wrapper
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+before_install:
+  - chmod +x mvnw
 
 after_success:
   #TAG
