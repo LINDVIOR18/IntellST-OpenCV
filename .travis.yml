@@ -10,10 +10,11 @@ dist: trusty
 jdk:
   - openjdk11
 
-
-
 os:
   - linux
+
+before_install:
+  - chmod +x mvnw
 
 env:
   global:
@@ -27,8 +28,6 @@ script:
   - mvn -N io.takari:maven:wrapper
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
-before_install:
-  - chmod +x mvnw
 
 after_success:
   #TAG
@@ -40,3 +39,7 @@ after_success:
   - docker build -t $intellst:$COMMIT ./
   - docker tag $intellst:$COMMIT $intellst:$TAG
   - docker push $intellst
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
