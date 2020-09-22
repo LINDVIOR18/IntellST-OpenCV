@@ -5,7 +5,7 @@ services:
     image: lindvior2/intellst-opencv:latest
     container_name: intellst
     ports:
-      - "8083:8083"
+      - "8084:8084"
     networks:
       - intellst
 networks:

@@ -97,24 +97,26 @@
         <!--        Tesseract   -->
         <dependency>
             <groupId>org.bytedeco</groupId>
-            <artifactId>tesseract</artifactId>
+            <artifactId>tesseract-platform</artifactId>
             <version>4.1.1-1.5.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-            <version>1.5.4</version>
-        </dependency>
-
-
-        <!--        OpenCV        -->
+        <!--        OpenCV  WINDOWS      -->
         <dependency>
             <groupId>com.recognition</groupId>
-            <artifactId>lib</artifactId>
+            <artifactId>lib.win</artifactId>
             <version>4.40</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/opencv-440.jar</systemPath>
+            <systemPath>${pom.basedir}/src/main/resources/lib/win/opencv-440.jar</systemPath>
+        </dependency>
+
+        <!--        OpenCV LINUX       -->
+        <dependency>
+            <groupId>com.recognition</groupId>
+            <artifactId>lib.linux</artifactId>
+            <version>4.50</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/resources/lib/linux/opencv-450.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.oracle.oci.sdk</groupId>
