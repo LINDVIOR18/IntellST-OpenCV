@@ -13,9 +13,6 @@ jdk:
 os:
   - linux
 
-before_install:
-  - chmod +x mvnw
-
 env:
   global:
     - COMMIT=${TRAVIS_COMMIT::7}
@@ -23,6 +20,12 @@ env:
 branches:
   only:
     - master
+
+script:
+  - mvn -N io.takari:maven:wrapper
+  - chmod +x ./mvnw
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
 
 after_success:
   #TAG
@@ -38,3 +41,4 @@ after_success:
 cache:
   directories:
     - '$HOME/.m2/repository'
+    - "$HOME/.cache"
