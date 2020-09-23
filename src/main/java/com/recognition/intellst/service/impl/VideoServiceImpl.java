@@ -32,10 +32,10 @@ public class VideoServiceImpl implements VideoService {
             videoCapture.read(frame);
             try {
                 if (!frame.empty()) {
-                    Mat test = imread("src/main/resources/training/spanish-numbers.jpg");
-                    String temperature = ImageTemperatureReader
-                            .readTemperature(Objects.requireNonNull(OpenCVImageUtils.matToBufferedImage(test)));
-                    System.out.println(temperature);
+//                    Mat test = imread("src/main/resources/training/spanish-numbers.jpg");
+//                    String temperature = ImageTemperatureReader
+//                            .readTemperature((Objects.requireNonNull(OpenCVImageUtils.matToBufferedImage(test))));
+//                    System.out.println(temperature);
                     if (threadImage == null) {
                         detectAndDisplay(frame);
                     } else {
