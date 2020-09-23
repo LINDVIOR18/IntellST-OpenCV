@@ -21,10 +21,12 @@ branches:
   only:
     - master
 
+before_script:
+  - chmod +x mvnw
+
 script:
   - mvn -N io.takari:maven:wrapper
-  - chmod +x ./mvnw
-  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 
 after_success:
