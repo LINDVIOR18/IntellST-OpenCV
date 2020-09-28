@@ -6,7 +6,7 @@ import org.opencv.core.Core;
 import java.io.File;
 
 public class OpenCVLibraryUtils {
-    private static String OS = System.getProperty("os.name").toLowerCase();
+    private static final String OS = System.getProperty("os.name").toLowerCase();
 
     private static boolean isWindows() {
         return (OS.contains("win"));
@@ -19,7 +19,7 @@ public class OpenCVLibraryUtils {
     public static void prepareLib() {
         String ext;
 
-        File file = new File("src/main/resources/training" );
+        File file = new File("src/main/resources/training");
         file.mkdir();
 
         if (isUnix()) {
