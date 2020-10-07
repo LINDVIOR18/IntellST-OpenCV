@@ -10,6 +10,9 @@ dist: trusty
 jdk:
   - openjdk11
 
+before_install:
+  - chmod +x mvnw
+
 os:
   - linux
 
@@ -21,26 +24,15 @@ branches:
   only:
     - master
 
-before_script:
-  - chmod +x mvnw
-
-script:
-  - mvn -N io.takari:maven:wrapper
-  - ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
-
 after_success:
   #TAG
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   #Docker Login
-  - docker login -u $DOCKER_USER --password-stdin $DOCKER_PASS
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
   #IntellST-OpenCV
-  - export intellst=lindvior2/intellst-opencv
-  - docker build -t $intellst:$COMMIT ./
-  - docker tag $intellst:$COMMIT $intellst:$TAG
-  - docker push $intellst
-
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - "$HOME/.cache"
+  - export IntellST-OpenCV=lindvior2/intellst-opencv
+  - docker build -t $IntellST-OpenCV:$COMMIT ./
+  - docker tag $IntellST-OpenCV:$COMMIT $IntellST-OpenCV:$TAG
+  - docker push $IntellST-OpenCV
+script:
+  - ./mvnw clean install -B
