@@ -1,0 +1,44 @@
+sudo:
+  required
+
+services:
+  - docker
+
+language: java
+dist: trusty
+
+jdk:
+  - openjdk11
+
+os:
+  - linux
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+branches:
+  only:
+    - master
+
+before_install:
+  - mvn -N io.takari:maven:wrapper
+  - chmod +x ./mvnw
+  - ./mvnw clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+
+after_success:
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  #Docker Login
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  #IntellST-OpenCV
+  - export intellst=lindvior2/intellst-opencv
+  - docker build -t $intellst:$COMMIT ./
+  - docker tag $intellst:$COMMIT $intellst:$TAG
+  - docker push $intellst
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - "$HOME/.cache"
