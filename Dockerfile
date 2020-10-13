@@ -5,7 +5,8 @@ RUN apt-get -y update &&\
     apt-get -y upgrade &&\
     apt-get install -y git &&\
     apt-get install -y ffmpeg &&\
-    apt-get install -y openjdk-11-jre openjdk-11-jdk
+    apt-get install -y default-jre &&\
+    apt-get install -y default-jdk
 
 RUN git clone https://github.com/LINDVIOR18/OpenCV-4.5.0-FOR-JAVA.git
 COPY ./target/intellst-0.0.1-SNAPSHOT.jar /run
