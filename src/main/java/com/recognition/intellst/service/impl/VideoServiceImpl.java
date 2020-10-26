@@ -56,36 +56,34 @@ public class VideoServiceImpl implements VideoService {
     public void startCamera(String videoURL, boolean activeCamera) {
         log.info("method = startCamera");
 
-        try {
-            if (activeCamera) {
-                videoCapture = new VideoCapture();
-                videoCapture.open(videoURL, Videoio.CAP_ANY);
-                videoCapture.set(Videoio.CAP_PROP_FRAME_WIDTH, VIDEO_WIDTH);
-                videoCapture.set(Videoio.CAP_PROP_FRAME_HEIGHT, VIDEO_HEIGHT);
-                videoCapture.set(Videoio.CAP_PROP_FPS, 30);
+        if (activeCamera && videoURL != null) {
+            videoCapture = new VideoCapture();
+            videoCapture.open(videoURL, Videoio.CAP_ANY);
+            videoCapture.set(Videoio.CAP_PROP_FRAME_WIDTH, VIDEO_WIDTH);
+            videoCapture.set(Videoio.CAP_PROP_FRAME_HEIGHT, VIDEO_HEIGHT);
+            videoCapture.set(Videoio.CAP_PROP_FPS, 30);
 
-                log.info("VideoCapture is Active");
+            log.info("VideoCapture is Active");
 
-                Mat frame = new Mat();
-                while (true) {
-                    if (videoCapture.isOpened()) {
-                        videoCapture.read(frame);
-                        if (!frame.empty()) {
-                            grabFrame();
-                        }
+            Mat frame = new Mat();
+            while (true) {
+                if (videoCapture.isOpened()) {
+                    videoCapture.read(frame);
+                    if (!frame.empty()) {
+                        grabFrame();
                     }
                 }
-            } else {
-                try {
-                    videoCapture.release();
-                    log.info("Camera is stopped");
-                } catch (Exception e) {
-                    log.info("Camera is stopped error occurred, camera is already stopped");
-                    e.getCause();
-                }
             }
-        } catch (NotAcceptableStatusException e) {
-            log.error("The URL is no't acceptable");
+        } else if (!activeCamera) {
+            try {
+                videoCapture.release();
+                log.info("Camera is stopped");
+            } catch (Exception e) {
+                log.info("Camera is stopped error occurred, camera is already stopped");
+                e.getCause();
+            }
+        } else {
+            throw new NotAcceptableStatusException("Video URL is Empty or incorrect");
         }
     }
 }
