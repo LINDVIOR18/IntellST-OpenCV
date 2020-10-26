@@ -1,24 +1,21 @@
 package com.recognition.intellst.service.impl;
 
-import com.recognition.intellst.recognition.temperature.ImageTemperatureReader;
 import com.recognition.intellst.service.VideoService;
-import com.recognition.intellst.utils.OpenCVImageUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.NotAcceptableStatusException;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import static com.recognition.intellst.recognition.face.CollectData.saveImage;
 import static com.recognition.intellst.recognition.face.FaceDisplay.detectAndDisplay;
 import static com.recognition.intellst.recognition.face.FaceDisplay.threadImage;
 import static com.recognition.intellst.recognition.face.RecognitionConstants.VIDEO_HEIGHT;
 import static com.recognition.intellst.recognition.face.RecognitionConstants.VIDEO_WIDTH;
-import static org.opencv.imgcodecs.Imgcodecs.imread;
 
 @Slf4j
 @Service
@@ -70,11 +67,15 @@ public class VideoServiceImpl implements VideoService {
 
             Mat frame = new Mat();
             while (true) {
-                if (videoCapture.isOpened()) {
-                    videoCapture.read(frame);
-                    if (!frame.empty()) {
-                        grabFrame();
+                try {
+                    if (videoCapture.isOpened()) {
+                        videoCapture.read(frame);
+                        if (!frame.empty()) {
+                            grabFrame();
+                        }
                     }
+                } catch (NotAcceptableStatusException e) {
+                    log.error("The URL is no't acceptable");
                 }
             }
         } else {
