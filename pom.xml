@@ -147,7 +147,7 @@
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>com.recognition</groupId>
                             <artifactId>lib</artifactId>
-                            <version>4.50</version>
+                            <version>4.40</version>
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                         </configuration>
