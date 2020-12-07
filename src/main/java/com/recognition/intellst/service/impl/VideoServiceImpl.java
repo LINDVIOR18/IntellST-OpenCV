@@ -1,6 +1,8 @@
 package com.recognition.intellst.service.impl;
 
+import com.recognition.intellst.api.DataToSent;
 import com.recognition.intellst.service.VideoService;
+import com.recognition.intellst.utils.OpenCVImageUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.opencv.core.Mat;
@@ -10,12 +12,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.NotAcceptableStatusException;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.recognition.intellst.recognition.face.CollectData.saveImage;
+import static com.recognition.intellst.recognition.face.CollectData.uuid;
 import static com.recognition.intellst.recognition.face.FaceDisplay.detectAndDisplay;
 import static com.recognition.intellst.recognition.face.FaceDisplay.threadImage;
 import static com.recognition.intellst.recognition.face.RecognitionConstants.VIDEO_HEIGHT;
 import static com.recognition.intellst.recognition.face.RecognitionConstants.VIDEO_WIDTH;
+import static com.recognition.intellst.recognition.temperature.ImageTemperatureReader.readTemperature;
+import static com.recognition.intellst.recognition.temperature.ImageTemperatureReader.temperature;
 
 @Slf4j
 @Service
@@ -29,10 +35,7 @@ public class VideoServiceImpl implements VideoService {
             videoCapture.read(frame);
             try {
                 if (!frame.empty()) {
-//                    Mat test = imread("src/main/resources/training/spanish-numbers.jpg");
-//                    String temperature = ImageTemperatureReader
-//                            .readTemperature((Objects.requireNonNull(OpenCVImageUtils.matToBufferedImage(test))));
-//                    System.out.println(temperature);
+                    readTemperature((Objects.requireNonNull(OpenCVImageUtils.matToBufferedImage(frame))));
                     if (threadImage == null) {
                         detectAndDisplay(frame);
                     } else {
@@ -48,8 +51,15 @@ public class VideoServiceImpl implements VideoService {
             }
             System.gc();
         }
-    }
+        DataToSent dataToSent = new DataToSent();
+        int label = 1;
 
+        if (!uuid.equals(uuid)) {
+            dataToSent.setTemperature(temperature);
+            dataToSent.setUuid(uuid);
+            dataToSent.setPhotoFilename("src/main/resources/training/" + uuid + "/" + ++label + "-" + uuid + "_" + "1" + ".png");
+        }
+    }
 
     @SneakyThrows
     @Override
