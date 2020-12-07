@@ -102,21 +102,26 @@
         </dependency>
 
         <!--        OpenCV LINUX       -->
-        <dependency>
-            <groupId>my.recognition</groupId>
-            <artifactId>lib</artifactId>
-            <version>4.50</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/opencv-450.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>my.recognition</groupId>-->
+<!--            <artifactId>lib</artifactId>-->
+<!--            <version>4.50</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/src/main/resources/lib/opencv-450.jar</systemPath>-->
+<!--        </dependency>-->
 
         <dependency>
-        <groupId>com.recognition</groupId>
+            <groupId>com.recognition</groupId>
             <artifactId>lib</artifactId>
             <version>4.40</version>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>localrepository</id>
+            <url>file://${project.basedir}/src/main/resources/lib/opencv-450.jar</url>
+        </repository>
+    </repositories>
     <!--    BUILD PLUGINS-->
     <build>
         <plugins>
