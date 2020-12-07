@@ -5,8 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.4.0</version>
+        <relativePath/>
     </parent>
 
     <groupId>com.recognition</groupId>
@@ -59,10 +59,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-core</artifactId>
+            <version>2.4.1</version>
         </dependency>
 
         <!--SWAGGER-->
@@ -108,20 +110,17 @@
 <!--            <version>4.50</version>-->
 <!--            <scope>system</scope>-->
 <!--            <systemPath>${project.basedir}/src/main/resources/lib/opencv-450.jar</systemPath>-->
+<!--            <type>jar</type>-->
+<!--            <optional>true</optional>-->
 <!--        </dependency>-->
 
         <dependency>
             <groupId>com.recognition</groupId>
             <artifactId>lib</artifactId>
-            <version>4.40</version>
+            <version>4.50</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>localrepository</id>
-            <url>file://${project.basedir}/src/main/resources/lib/opencv-450.jar</url>
-        </repository>
-    </repositories>
+
     <!--    BUILD PLUGINS-->
     <build>
         <plugins>
@@ -148,7 +147,7 @@
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>com.recognition</groupId>
                             <artifactId>lib</artifactId>
-                            <version>4.40</version>
+                            <version>4.50</version>
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                         </configuration>
