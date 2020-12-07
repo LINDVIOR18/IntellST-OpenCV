@@ -104,20 +104,20 @@
         </dependency>
 
         <!--        OpenCV LINUX       -->
-<!--        <dependency>-->
-<!--            <groupId>my.recognition</groupId>-->
-<!--            <artifactId>lib</artifactId>-->
-<!--            <version>4.50</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/src/main/resources/lib/opencv-450.jar</systemPath>-->
-<!--            <type>jar</type>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>my.recognition</groupId>
+            <artifactId>lib</artifactId>
+            <version>4.50</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/resources/lib/opencv-450.jar</systemPath>
+            <type>jar</type>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>com.recognition</groupId>
             <artifactId>lib</artifactId>
-            <version>4.50</version>
+            <version>4.40</version>
         </dependency>
     </dependencies>
 
@@ -143,7 +143,7 @@
                         <id>install-artifact</id>
                         <phase>clean</phase>
                         <configuration>
-                            <file>${project.basedir}/src/main/resources/lib/opencv-450.jar</file>
+                            <file>${pom.basedir}/src/main/resources/lib/opencv-450.jar</file>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>com.recognition</groupId>
                             <artifactId>lib</artifactId>
