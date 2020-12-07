@@ -114,11 +114,11 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>com.recognition</groupId>
-            <artifactId>lib</artifactId>
-            <version>4.40</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.recognition</groupId>-->
+<!--            <artifactId>lib</artifactId>-->
+<!--&lt;!&ndash;            <version>4.40</version>&ndash;&gt;-->
+<!--        </dependency>-->
     </dependencies>
 
     <!--    BUILD PLUGINS-->
