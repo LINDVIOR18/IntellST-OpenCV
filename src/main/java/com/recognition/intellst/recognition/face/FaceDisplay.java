@@ -54,11 +54,7 @@ public class FaceDisplay {
             StringBuilder name = new StringBuilder(faceRecognizer.getLabelInfo(label[0]));
 
             if (confidence[0] < 50) {
-
-                System.out.println(name);
-
-//                name.append(" ").append(new DecimalFormat("#.0").format(confidence[0]));
-
+                CollectData.uuid = String.valueOf(name);
             } else {
 
                 Runnable collect = new CollectData();

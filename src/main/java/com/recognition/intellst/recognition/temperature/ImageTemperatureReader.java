@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.leptonica.PIX;
 import org.bytedeco.tesseract.TessBaseAPI;
-import org.bytedeco.tesseract.Tesseract;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,11 +19,9 @@ import static org.bytedeco.tesseract.global.tesseract.PSM_SINGLE_BLOCK;
 @Slf4j
 public class ImageTemperatureReader {
 
-    //    static {
-//        System.load("D:\\Projects\\some\\IntellST-OpenCV\\src\\main\\resources\\lib\\" + Core.NATIVE_LIBRARY_NAME + ".dll");
-//    }
+    public static float temperature;
 
-    public static String readTemperature(BufferedImage imgBuff) throws IOException {
+    public static void readTemperature(BufferedImage imgBuff) throws IOException {
 
         BufferedImage result = new BufferedImage(
                 imgBuff.getWidth(),
@@ -76,6 +73,37 @@ public class ImageTemperatureReader {
         if (iSpace != -1) {
             parsedOut = parsedOut.substring(0, iSpace);
         }
-        return parsedOut;
+        temperature = Float.parseFloat(extractNumber(parsedOut));
+    }
+
+    private static String parseNum(String string) {
+        char num1 = string.charAt(0);
+        char num2 = string.charAt(1);
+
+        if (string.length() == 3 && num1 == 3 && num2 == 6 || num2 == 7) {
+            char num3 = string.charAt(2);
+            string = num1 + num2 + "." + num3;
+            return string;
+        } else if (string.length() == 2 && num1 == 3 && num2 == 6 || num2 == 7) {
+            return string + "." + "0";
+        }
+        return string;
+    }
+
+    private static String extractNumber(String str) {
+
+        if (str == null || str.isEmpty()) return "";
+
+        StringBuilder stringBuilder = new StringBuilder();
+        boolean found = false;
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c)) {
+                stringBuilder.append(c);
+                found = true;
+            } else if (found) {
+                break;
+            }
+        }
+        return parseNum(stringBuilder.toString());
     }
 }
